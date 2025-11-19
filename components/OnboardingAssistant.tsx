@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { MessageSquare, XIcon, LightbulbIcon, CheckCircle, Home, FileText } from './Icons';
+import { XIcon, LightbulbIcon, CheckCircle, Home, FileText } from './Icons';
 
 interface Tip {
   icon: React.ElementType;
@@ -47,45 +47,13 @@ const assistantTips: Record<number, Tip[]> = {
   ]
 };
 
-const AlaslaBotAvatar: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
-        <defs>
-            <linearGradient id="avatar-bg-pro" x1="0" y1="0" x2="1" y2="1">
-                <stop stopColor="#484848" />
-                <stop offset="1" stopColor="#222222" />
-            </linearGradient>
-            <linearGradient id="robot-head-pro" x1="0.5" y1="0" x2="0.5" y2="1">
-                <stop stopColor="#F7F7F7" />
-                <stop offset="1" stopColor="#DCDCDC" />
-            </linearGradient>
-            <linearGradient id="robot-neck-pro" x1="0.5" y1="0" x2="0.5" y2="1">
-                <stop stopColor="#C0C0C0" />
-                <stop offset="1" stopColor="#A9A9A9" />
-            </linearGradient>
-            <filter id="eye-glow-pro" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur" />
-                <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                </feMerge>
-            </filter>
-        </defs>
-
-        <circle cx="50" cy="50" r="48" fill="url(#avatar-bg-pro)" stroke="#555" strokeWidth="1.5" />
-        <path d="M42 75 C 40 85, 60 85, 58 75 Z" fill="url(#robot-neck-pro)" />
-        <path d="M28 35 C 28 22, 72 22, 72 35 V 70 C 72 78, 64 80, 50 80 C 36 80, 28 78, 28 70 Z" fill="url(#robot-head-pro)" stroke="#B0B0B0" strokeWidth="1" />
-        <path d="M30 35 C 40 32, 60 32, 70 35" stroke="white" strokeWidth="1.5" strokeLinecap="round" opacity="0.7" />
-        <g>
-            <rect x="35" y="48" width="30" height="10" rx="3" fill="#222222" />
-            <rect x="36" y="50" width="28" height="6" rx="2" fill="#FF5A5F" filter="url(#eye-glow-pro)" />
-        </g>
-        <g transform="translate(70 50)">
-            <circle cx="0" cy="0" r="5" fill="#C0C0C0" stroke="#B0B0B0" strokeWidth="1" />
-            <circle cx="0" cy="0" r="2" fill="#484848" />
-        </g>
-    </svg>
+const AlaslaBotAvatar: React.FC<{ className?: string }> = ({ className }) => (
+    <div className={`flex items-center justify-center bg-gradient-to-br from-alasla-red-start to-alasla-red-end text-white shadow-sm rounded-full ${className}`}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3/5 h-3/5">
+            <path fillRule="evenodd" d="M4.804 21.644A6.707 6.707 0 006 21.75a6.721 6.721 0 003.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 01-.814 1.686.75.75 0 00.44 1.223zM8.25 10.875a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25zM10.875 12a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zm4.875-1.125a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clipRule="evenodd" />
+        </svg>
+    </div>
 );
-
 
 const OnboardingAssistant: React.FC<{ currentStep: number }> = ({ currentStep }) => {
   const [isOpen, setIsOpen] = useState(false);

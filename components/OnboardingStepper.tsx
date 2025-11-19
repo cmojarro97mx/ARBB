@@ -1130,9 +1130,9 @@ export const OnboardingStepper: React.FC = () => {
         <div className="relative">
             <div className="bg-white rounded-2xl shadow-lg flex flex-col md:flex-row max-w-6xl md:h-[calc(100vh-8.5rem)] w-full mx-auto animate-fade-in overflow-hidden">
                 <aside className="md:w-[320px] flex-shrink-0 bg-gray-900 text-white p-8 flex flex-col rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
-                    <div className="mb-10 flex-shrink-0">
-                        <ArrivingCarAnimation className="h-20 w-auto text-gray-300" />
-                        <h2 className="text-xl font-bold mt-4 text-gray-100">Conviértete en anfitrión</h2>
+                    <div className="mb-10 flex-shrink-0 text-center">
+                        <ArrivingCarAnimation className="h-32 w-auto text-gray-300 mx-auto" />
+                        <h2 className="text-xl font-bold mt-6 text-gray-100">Conviértete en anfitrión</h2>
                     </div>
                     <nav className="relative -ml-4 pr-4 overflow-y-auto flex-1 min-h-0">
                         <ol>

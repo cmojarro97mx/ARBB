@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { XIcon, LightbulbIcon, CheckCircle, Home, FileText } from './Icons';
+import { XIcon, LightbulbIcon, CheckCircle, Home, FileText, InfoIcon } from './Icons';
 
 interface Tip {
   icon: React.ElementType;
@@ -10,88 +10,120 @@ interface Tip {
 
 const assistantTips: Record<number, Tip[]> = {
   0: [
-    { icon: LightbulbIcon, title: "¡Bienvenido!", content: "Soy tu asistente. Te guiaré para que completes tu registro de forma rápida y sencilla." },
-    { icon: LightbulbIcon, title: "Nombre Oficial", content: "Asegúrate de que tu nombre completo coincida exactamente con el de tu identificación oficial (INE/Pasaporte)." },
+    { icon: LightbulbIcon, title: "Comencemos", content: "Esta guía te acompañará en cada paso. Revisa estos consejos para agilizar tu registro." },
+    { icon: FileText, title: "Nombre Oficial", content: "Asegúrate de escribir tu nombre exactamente como aparece en tu identificación oficial (INE o Pasaporte)." },
   ],
   1: [
-    { icon: Home, title: "Tu Domicilio", content: "Ingresa la dirección tal como aparece en tu comprobante de domicilio. Esto es importante para la verificación." },
-    { icon: LightbulbIcon, title: "¡Vas muy bien!", content: "Cada paso que completas nos acerca a tener tu propiedad lista para recibir huéspedes." },
+    { icon: Home, title: "Tu Domicilio", content: "Ingresa la dirección tal como aparece en tu comprobante de domicilio. Esto es vital para la verificación de identidad." },
+    { icon: CheckCircle, title: "Progreso", content: "Cada sección completada se guardará automáticamente." },
   ],
   2: [
-    { icon: FileText, title: "Información Fiscal", content: "Tu RFC y Constancia Fiscal son cruciales. Tómate tu tiempo para ingresarlos correctamente." },
-    { icon: LightbulbIcon, title: "Régimen Correcto", content: "Recuerda que debes estar en el 'Régimen de Plataformas Tecnológicas' para evitar inconvenientes." },
+    { icon: FileText, title: "Información Fiscal", content: "Ten a la mano tu Constancia de Situación Fiscal. Necesitaremos datos exactos de tu régimen." },
+    { icon: InfoIcon, title: "Régimen Requerido", content: "Recuerda que debes estar en el 'Régimen de Plataformas Tecnológicas' para evitar retenciones excesivas." },
   ],
   3: [
-    { icon: LightbulbIcon, title: "Fotos Claras", content: "Sube fotos nítidas y bien iluminadas de tu identificación. Asegúrate de que todo el texto sea legible." },
+    { icon: LightbulbIcon, title: "Fotos Claras", content: "Al subir tu identificación, asegúrate de que la imagen no esté borrosa y que los textos sean legibles." },
   ],
   4: [
-    { icon: LightbulbIcon, title: "Documento Reciente", content: "El comprobante de domicilio no debe tener más de 3 meses de antigüedad. ¡Revisa la fecha!" },
+    { icon: InfoIcon, title: "Vigencia", content: "El comprobante de domicilio no debe tener más de 3 meses de antigüedad." },
   ],
   5: [
-    { icon: Home, title: "Detalles del Inmueble", content: "Describe tu propiedad de forma atractiva. Piensa en lo que la hace especial para los futuros huéspedes." },
-    { icon: LightbulbIcon, title: "¡Ya casi!", content: "Estás en la recta final de la sección de documentos. ¡Sigue así!" },
+    { icon: Home, title: "Describe tu espacio", content: "Piensa en lo que hace especial a tu propiedad. Una buena descripción atrae a mejores huéspedes." },
+    { icon: CheckCircle, title: "Casi listo", content: "Estás en la recta final de la sección de captura de datos." },
   ],
   6: [
-    { icon: FileText, title: "Escritura de Propiedad", content: "Este documento verifica que eres el propietario legal. Solo necesitamos la primera hoja donde aparecen los datos clave." },
+    { icon: FileText, title: "Escritura", content: "Solo necesitamos la primera hoja de la escritura donde aparecen los datos del propietario y la dirección." },
   ],
   7: [
-    { icon: LightbulbIcon, title: "Doble Verificación", content: "Revisa tu CLABE interbancaria dos veces. Un número incorrecto puede causar retrasos en tus pagos." },
+    { icon: InfoIcon, title: "Pagos", content: "Verifica tu CLABE dos veces. Aquí es donde depositaremos tus ganancias futuras." },
   ],
   8: [
-    { icon: CheckCircle, title: "Revisión Final", content: "Este es el momento de verificar que toda tu información sea correcta. Un último vistazo te ahorrará tiempo después." },
-    { icon: LightbulbIcon, title: "Excelente Trabajo", content: "Has completado toda la información. ¡Solo queda un paso más!" },
+    { icon: CheckCircle, title: "Revisión", content: "Tómate un momento para leer todos los datos. Corregir ahora es más fácil que hacerlo después." },
   ],
   9: [
-    { icon: FileText, title: "El Contrato", content: "Lee con atención los términos y condiciones. Este es el acuerdo que formaliza nuestra colaboración." },
-    { icon: LightbulbIcon, title: "¡Felicidades!", content: "Estás a un clic de convertirte oficialmente en anfitrión de Alasla. ¡Estamos emocionados de tenerte!" },
+    { icon: FileText, title: "Contrato Digital", content: "Lee los términos y condiciones. Al firmar, formalizas nuestra colaboración." },
+    { icon: LightbulbIcon, title: "¡Finalizar!", content: "Una vez firmado, tu perfil pasará a revisión por nuestro equipo." },
   ]
 };
 
 const AlaslaBotAvatar: React.FC<{ className?: string }> = ({ className }) => (
-    <div className={`flex items-center justify-center bg-gradient-to-br from-alasla-red-start to-alasla-red-end text-white shadow-sm rounded-full ${className}`}>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3/5 h-3/5">
-            <path fillRule="evenodd" d="M4.804 21.644A6.707 6.707 0 006 21.75a6.721 6.721 0 003.583-1.029c.774.182 1.584.279 2.417.279 5.322 0 9.75-3.97 9.75-9 0-5.03-4.428-9-9.75-9s-9.75 3.97-9.75 9c0 2.409 1.025 4.587 2.674 6.192.232.226.277.428.254.543a3.73 3.73 0 01-.814 1.686.75.75 0 00.44 1.223zM8.25 10.875a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25zM10.875 12a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zm4.875-1.125a1.125 1.125 0 100 2.25 1.125 1.125 0 000-2.25z" clipRule="evenodd" />
+    <div className={`relative flex items-center justify-center bg-gradient-to-br from-alasla-red-start to-alasla-red-end text-white shadow-sm rounded-full overflow-hidden ${className}`}>
+         <svg 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg" 
+            className="w-3/5 h-3/5"
+        >
+            <style>
+                {`
+                    .avatar-draw {
+                        stroke-dasharray: 50;
+                        stroke-dashoffset: 50;
+                        animation: drawAvatar 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+                    }
+                    .avatar-pop {
+                        opacity: 0;
+                        transform: scale(0.5);
+                        transform-origin: center;
+                        animation: popAvatar 0.4s 1.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+                    }
+                    @keyframes drawAvatar { to { stroke-dashoffset: 0; } }
+                    @keyframes popAvatar { to { opacity: 1; transform: scale(1); } }
+                `}
+            </style>
+            {/* Simplified House Icon replicating the main animation style */}
+            <path 
+                d="M3 9.5L12 3L21 9.5V21H3V9.5Z" 
+                stroke="currentColor" 
+                strokeWidth="2.5" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="avatar-draw" 
+            />
+            {/* Heart/Sparkle accent */}
+            <path 
+                d="M12 13C12 13 13.5 11.5 14.5 12.5C15.5 13.5 14.5 15 12 17C9.5 15 8.5 13.5 9.5 12.5C10.5 11.5 12 13 12 13Z" 
+                fill="white" 
+                className="avatar-pop"
+            />
         </svg>
     </div>
 );
 
 const OnboardingAssistant: React.FC<{ currentStep: number }> = ({ currentStep }) => {
   const [isOpen, setIsOpen] = useState(false);
+  // Key helps trigger animation when content changes
   const [key, setKey] = useState(0);
+  const [hasNewTips, setHasNewTips] = useState(false);
 
   const currentTips = useMemo(() => assistantTips[currentStep] || [], [currentStep]);
 
   useEffect(() => {
-    setIsOpen(false);
+    // When step changes, briefly highlight the assistant button if closed
     setKey(prevKey => prevKey + 1);
-  }, [currentStep]);
-
-  // Auto-close effect
-  useEffect(() => {
-    let timer: number;
-    if (isOpen) {
-      timer = window.setTimeout(() => {
-        setIsOpen(false);
-      }, 5000);
+    if (!isOpen) {
+        setHasNewTips(true);
     }
-    return () => {
-      if (timer) {
-        window.clearTimeout(timer);
-      }
-    };
-  }, [isOpen]);
+  }, [currentStep, isOpen]);
 
+  const handleOpen = () => {
+      setIsOpen(true);
+      setHasNewTips(false);
+  };
 
-  const TipBubble: React.FC<{ tip: Tip; delay: number }> = ({ tip, delay }) => {
+  const TipCard: React.FC<{ tip: Tip; delay: number }> = ({ tip, delay }) => {
     const Icon = tip.icon;
     return (
-      <div className="flex items-start space-x-3 p-3 bg-white rounded-lg animate-fade-in" style={{ animationDelay: `${delay}ms`}}>
-        <div className="flex-shrink-0 mt-1">
-            <Icon className="w-5 h-5 text-alasla-red" />
+      <div 
+        className="flex items-start gap-4 p-4 bg-white border border-alasla-gray-medium/60 rounded-xl hover:border-alasla-gray-medium transition-colors duration-300 animate-fade-in shadow-sm" 
+        style={{ animationDelay: `${delay}ms`}}
+      >
+        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-alasla-red/5 flex items-center justify-center text-alasla-red-start">
+            <Icon className="w-5 h-5" />
         </div>
-        <div>
-          <h4 className="text-sm font-bold text-alasla-dark">{tip.title}</h4>
-          <p className="text-xs text-alasla-gray-dark mt-0.5">{tip.content}</p>
+        <div className="flex-1 pt-0.5">
+          <h4 className="text-sm font-bold text-gray-900">{tip.title}</h4>
+          <p className="text-xs text-gray-500 mt-1 leading-relaxed">{tip.content}</p>
         </div>
       </div>
     );
@@ -99,16 +131,25 @@ const OnboardingAssistant: React.FC<{ currentStep: number }> = ({ currentStep })
   
   if (!isOpen) {
     return (
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed bottom-8 right-8 z-50">
         <button
-            onClick={() => setIsOpen(true)}
-            className="relative w-16 h-16 rounded-full bg-white shadow-xl flex items-center justify-center transform hover:scale-110 transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-alasla-red/50 focus:ring-offset-2"
-            aria-label="Abrir asistente AlaslaBot"
+            onClick={handleOpen}
+            className="group relative w-14 h-14 rounded-full bg-white shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] border border-gray-100 flex items-center justify-center transition-all duration-300 hover:scale-105 focus:outline-none"
+            aria-label="Ver guía de ayuda"
         >
-            <AlaslaBotAvatar className="w-full h-full object-cover" />
-            <span className="absolute top-1 right-1 flex h-3.5 w-3.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-alasla-red-start opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-alasla-red-end ring-2 ring-white"></span>
+            <AlaslaBotAvatar className="w-full h-full opacity-90 group-hover:opacity-100 transition-opacity" />
+            
+            {/* Notification Badge */}
+            {hasNewTips && (
+                <span className="absolute -top-1 -right-1 flex h-4 w-4">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-alasla-red-start opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-4 w-4 bg-alasla-red-start ring-2 ring-white"></span>
+                </span>
+            )}
+            
+            {/* Tooltip on hover */}
+            <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-gray-900 text-white text-xs font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                Guía del registro
             </span>
         </button>
       </div>
@@ -116,24 +157,52 @@ const OnboardingAssistant: React.FC<{ currentStep: number }> = ({ currentStep })
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 w-80">
-        <div className={`bg-alasla-gray-light rounded-2xl shadow-2xl border border-alasla-gray-medium transition-all duration-300 ease-in-out transform ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-            <header className="flex items-center justify-between p-3 border-b border-alasla-gray-medium bg-white rounded-t-2xl">
-                <div className="flex items-center space-x-3">
-                    <AlaslaBotAvatar className="w-10 h-10 rounded-full flex-shrink-0" />
-                    <div>
-                        <h3 className="text-sm font-bold text-alasla-dark">AlaslaBot</h3>
-                        <p className="text-xs text-alasla-gray-dark -mt-0.5">Asistente Virtual</p>
+    <div className="fixed bottom-8 right-8 z-50 w-[22rem] flex flex-col items-end">
+        {/* Main Panel */}
+        <div className={`w-full bg-white rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.15)] ring-1 ring-black/5 transition-all duration-300 ease-out transform origin-bottom-right overflow-hidden ${isOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-4 pointer-events-none'}`}>
+            
+            {/* Modern Header - No "Online" status, purely informational */}
+            <div className="px-6 py-5 border-b border-gray-100 bg-white">
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                        <div className="relative">
+                            <AlaslaBotAvatar className="w-10 h-10" />
+                        </div>
+                        <div>
+                            <h3 className="font-bold text-gray-900 text-sm">Asistente Alasla</h3>
+                            <p className="text-xs text-gray-500 font-medium">Guía paso a paso</p>
+                        </div>
                     </div>
+                    <button 
+                        onClick={() => setIsOpen(false)} 
+                        className="p-2 -mr-2 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-50 transition-colors"
+                        aria-label="Cerrar guía"
+                    >
+                        <XIcon className="w-5 h-5" />
+                    </button>
                 </div>
-                <button onClick={() => setIsOpen(false)} className="p-1 rounded-full hover:bg-alasla-gray-medium text-alasla-gray-dark">
-                    <XIcon className="w-4 h-4" />
-                </button>
-            </header>
-            <div className="p-3 space-y-2 max-h-80 overflow-y-auto" key={key}>
-                {currentTips.map((tip, index) => (
-                    <TipBubble key={index} tip={tip} delay={index * 150} />
-                ))}
+            </div>
+
+            {/* Content Area */}
+            <div className="p-5 bg-gray-50/50 max-h-[60vh] overflow-y-auto" key={key}>
+                <div className="space-y-3">
+                    {currentTips.length > 0 ? (
+                        currentTips.map((tip, index) => (
+                            <TipCard key={index} tip={tip} delay={index * 100} />
+                        ))
+                    ) : (
+                        <div className="text-center py-8 px-4">
+                            <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <CheckCircle className="w-6 h-6 text-gray-400" />
+                            </div>
+                            <p className="text-sm text-gray-500">Todo se ve bien en este paso. Continúa cuando estés listo.</p>
+                        </div>
+                    )}
+                </div>
+                
+                <div className="mt-6 pt-4 border-t border-gray-200/60 text-center">
+                     <p className="text-[10px] uppercase tracking-wider font-bold text-gray-400">Sugerencias útiles</p>
+                </div>
             </div>
         </div>
     </div>

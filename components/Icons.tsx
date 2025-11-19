@@ -6,64 +6,69 @@ type IconProps = React.SVGProps<SVGSVGElement>;
 // --- Logo ---
 
 export const AlaslaLogo: React.FC<IconProps> = (props) => (
-    <svg viewBox="0 0 140 40" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
-        {/* Symbol: Stylized 'A' / Roof */}
-        <path d="M20.5 8L4 32H11.5L14.5 27H26.5L29.5 32H37L20.5 8Z" fill="currentColor" />
-        <path d="M20.5 14L24.5 22H16.5L20.5 14Z" fill="white" />
+    <svg viewBox="0 0 120 32" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+        {/* Isotype: Abstract Roof/A Symbol */}
+        <path d="M16 4L4 28H10L12.5 23H19.5L22 28H28L16 4Z" fill="#FF5A5F" />
+        <path d="M16 11L18.5 18H13.5L16 11Z" fill="white" />
         
-        {/* Text */}
-        <path d="M55 32L50 32L50 14L44 14L44 10L61 10L61 14L55 14L55 32Z" fill="currentColor"/>
-        <path d="M65 10L71 10L71 32L77 32L77 36L65 36L65 10Z" fill="currentColor"/>
-        <path d="M89.5 10L81 32H87.5L89 28H98L99.5 32H106L97.5 10H89.5ZM93.5 16L96.5 24H90.5L93.5 16Z" fill="currentColor"/>
-        <path d="M112 24.5C112 22 113.5 21 116 21H120V18C120 16.5 119 15.5 117 15.5C115 15.5 113.5 16.5 113 18L108 17C109 13.5 112.5 11.5 117 11.5C122.5 11.5 125 14 125 18V32H120V29C119 31 117 32.5 114 32.5C110.5 32.5 108 30.5 108 27C108 23.5 110.5 21.5 114 21.5H114.5L120 21.5V24.5H116C114 24.5 112 25.5 112 27.5V24.5Z" fill="currentColor"/>
+        {/* Typography: Clean Geometric Sans */}
+        <path d="M42 28L38 28L38 11L33 11L33 7L47 7L47 11L42 11L42 28Z" fill="currentColor"/>
+        <path d="M52 7L56 7L56 24L62 24L62 28L52 28L52 7Z" fill="currentColor"/>
+        <path d="M74 7L67 28H71.5L72.5 25H79.5L80.5 28H85L78 7H74ZM76 14L78.5 21H73.5L76 14Z" fill="currentColor"/>
+        <path d="M92 18.5C92 16.5 93.5 15.5 96 15.5H99V13.5C99 12.5 98 11.5 96 11.5C94 11.5 92.5 12.5 92 13.5L89 12.5C90 9.5 92.5 8 96 8C101 8 103 10 103 13.5V28H99V25.5C98 27 96 28.5 93.5 28.5C90.5 28.5 88 26.5 88 23.5C88 20.5 90.5 18.5 94 18.5H94.5L99 18.5V20.5H96C94 20.5 92 21.5 92 23V18.5Z" fill="currentColor"/>
     </svg>
 );
 
-// --- Animation Component ---
+// --- Animation Component: House Drawing ---
 
-export const ArrivingCarAnimation: React.FC<IconProps> = (props) => (
+export const HostingStartAnimation: React.FC<IconProps> = (props) => (
     <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+        {/* Defines the drawing animation styles */}
         <style>
             {`
-                .house-draw { stroke-dasharray: 300; stroke-dashoffset: 300; animation: drawHouse 2s ease-out forwards; }
-                .roof-draw { stroke-dasharray: 200; stroke-dashoffset: 200; animation: drawRoof 2s 0.5s ease-out forwards; }
-                .door-pop { transform-origin: bottom center; transform: scaleY(0); animation: popUp 0.5s 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-                .window-pop { opacity: 0; animation: fadeIn 0.5s 2s ease-out forwards; }
-                .key-float { opacity: 0; transform: translateY(10px); animation: floatUp 1s 2.2s ease-out forwards, hover 3s 3.2s ease-in-out infinite; }
+                .draw-path {
+                    stroke-dasharray: 150;
+                    stroke-dashoffset: 150;
+                    animation: drawLine 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+                }
+                .draw-path-delay-1 { animation-delay: 0.3s; }
+                .draw-path-delay-2 { animation-delay: 0.8s; }
+                .pop-in {
+                    opacity: 0;
+                    transform: scale(0.5);
+                    transform-origin: center;
+                    animation: popIn 0.5s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+                }
                 
-                @keyframes drawHouse { to { stroke-dashoffset: 0; } }
-                @keyframes drawRoof { to { stroke-dashoffset: 0; } }
-                @keyframes popUp { to { transform: scaleY(1); } }
-                @keyframes fadeIn { to { opacity: 1; } }
-                @keyframes floatUp { to { opacity: 1; transform: translateY(0); } }
-                @keyframes hover { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+                @keyframes drawLine {
+                    to { stroke-dashoffset: 0; }
+                }
+                @keyframes popIn {
+                    to { opacity: 1; transform: scale(1); }
+                }
             `}
         </style>
         
-        {/* Ground */}
-        <line x1="10" y1="90" x2="90" y2="90" stroke="currentColor" strokeWidth="2" strokeLinecap="round" opacity="0.5" />
+        {/* Roof */}
+        <path className="draw-path" d="M20 45L50 15L80 45" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         
         {/* House Body */}
-        <path className="house-draw" d="M25 90V45H75V90" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        
-        {/* Roof */}
-        <path className="roof-draw" d="M15 45L50 15L85 45" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path className="draw-path draw-path-delay-1" d="M30 45V85H70V45" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         
         {/* Door */}
-        <path className="door-pop" d="M42 90V65C42 62.7909 43.7909 61 46 61H54C56.2091 61 58 62.7909 58 65V90" fill="currentColor" fillOpacity="0.1" stroke="currentColor" strokeWidth="2" />
+        <path className="draw-path draw-path-delay-2" d="M45 85V60H55V85" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         
-        {/* Window */}
-        <circle className="window-pop" cx="50" cy="35" r="6" fill="currentColor" fillOpacity="0.2" />
-
-        {/* Floating Key */}
-        <g className="key-float">
-            <circle cx="75" cy="30" r="8" stroke="#E61E4D" strokeWidth="2" fill="white" />
-            <path d="M75 38V55M75 45H80M75 50H80" stroke="#E61E4D" strokeWidth="2" strokeLinecap="round" />
+        {/* Decorative Elements (Sun/Sparkle) */}
+        <g className="pop-in">
+             <circle cx="80" cy="25" r="6" fill="#FF5A5F" />
         </g>
     </svg>
 );
 
-// --- Standard UI Icons (Refined 1.5px Stroke) ---
+// Backwards compatibility if needed, but we will replace usage
+export const ArrivingCarAnimation = HostingStartAnimation;
+
+// --- Standard UI Icons (Premium 1.5px Stroke) ---
 
 const BaseIcon: React.FC<IconProps> = ({ children, ...props }) => (
     <svg 

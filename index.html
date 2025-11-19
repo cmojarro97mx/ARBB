@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-g" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alasla SAS Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'alasla-red': '#FF5A5F',
+              'alasla-red-start': '#E61E4D',
+              'alasla-red-end': '#D70466',
+              'alasla-dark': '#484848',
+              'alasla-gray-light': '#F7F7F7',
+              'alasla-gray-medium': '#EBEBEB',
+              'alasla-gray-dark': '#767676',
+            },
+            keyframes: {
+              fadeIn: {
+                'from': { opacity: '0' },
+                'to': { opacity: '1' },
+              },
+              fadeOut: {
+                'from': { opacity: '1' },
+                'to': { opacity: '0' },
+              },
+              driveIn: {
+                '0%': { transform: 'translateX(-150%)', opacity: '0' },
+                '70%': { transform: 'translateX(5%)', opacity: '1' },
+                '100%': { transform: 'translateX(0)', opacity: '1' },
+              },
+              draw: {
+                'to': { 'stroke-dashoffset': '0' },
+              },
+              moveHand: {
+                '0%': { transform: 'translate(15px, 65px) rotate(-30deg)', opacity: '0' },
+                '10%': { opacity: '1' },
+                '40%': { transform: 'translate(50px, 5px) rotate(20deg)' },
+                '70%': { transform: 'translate(80px, 55px) rotate(-25deg)' },
+                '90%': { transform: 'translate(140px, 45px) rotate(10deg)' },
+                '100%': { transform: 'translate(140px, 45px) rotate(10deg)', opacity: '0' },
+              },
+              slideInRight: {
+                'from': { transform: 'translateX(100%)' },
+                'to': { transform: 'translateX(0)' },
+              },
+              slideOutRight: {
+                'from': { transform: 'translateX(0)' },
+                'to': { transform: 'translateX(100%)' },
+              },
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.3s ease-in-out',
+              'fade-out': 'fadeOut 0.2s ease-out forwards',
+              'drive-in': 'driveIn 1.6s cubic-bezier(0.25, 1, 0.5, 1) forwards',
+              'draw-signature': 'draw 2.5s 0.5s ease-in-out forwards',
+              'move-hand': 'moveHand 2.5s 0.5s ease-in-out forwards',
+              'slide-in-right': 'slideInRight 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards',
+              'slide-out-right': 'slideOutRight 0.25s ease-out forwards',
+            },
+          },
+        },
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.22.0"
+  }
+}
+</script>
+</head>
+  <body class="bg-alasla-gray-light">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

@@ -1,10 +1,10 @@
-# Documentación del Panel de Alasla SAS
+# Documentación del Panel SAS
 
-Bienvenido a la documentación interna del panel de Alasla. Este documento sirve como una guía central para los desarrolladores que trabajan en el proyecto, detallando su arquitectura, estructura, componentes clave y flujos de trabajo.
+Bienvenido a la documentación interna del panel de administración. Este documento sirve como una guía central para los desarrolladores que trabajan en el proyecto, detallando su arquitectura, estructura, componentes clave y flujos de trabajo.
 
 ## 1. Descripción General del Proyecto
 
-Este proyecto es un panel de control estilo Airbnb para la empresa inmobiliaria Alasla. La fase actual implementa dos flujos de usuario principales:
+Este proyecto es un panel de control estilo Airbnb para una empresa inmobiliaria. La fase actual implementa dos flujos de usuario principales:
 
 1.  **Autenticación:** Un sistema de inicio de sesión y registro para dos tipos de roles: **Anfitrión** y **Cliente**.
 2.  **Onboarding de Anfitriones:** Un detallado proceso de varios pasos para que los nuevos anfitriones registren su información personal, fiscal, de propiedad y bancaria.
@@ -86,7 +86,7 @@ Este es el flujo más complejo de la aplicación actual y está encapsulado en `
 ## 6. Estilos
 
 -   **Tailwind CSS:** Se utiliza para un desarrollo rápido y consistente de la UI.
--   **Configuración Personalizada:** La configuración del tema de Tailwind se encuentra directamente en `index.html` dentro de una etiqueta `<script>`. Esto incluye la paleta de colores personalizada (`alasla-red`, `alasla-dark`, etc.) y animaciones (`fadeIn`).
+-   **Configuración Personalizada:** La configuración del tema de Tailwind se encuentra directamente en `index.html` dentro de una etiqueta `<script>`. Esto incluye la paleta de colores personalizada y animaciones (`fadeIn`).
 
 ## 7. Posibles Mejoras a Futuro
 

@@ -1,4 +1,4 @@
-# Documentación Técnica - Alasla SAS Dashboard
+# Documentación Técnica - SAS Dashboard
 
 Este documento detalla la arquitectura, estilos y funcionamiento lógico de la aplicación, enfocado específicamente en el flujo de Anfitrión y la réplica del estilo visual de Airbnb.
 

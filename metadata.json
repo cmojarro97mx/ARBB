@@ -1,5 +1,5 @@
 {
   "name": "SAS Dashboard",
-  "description": "An Airbnb-style dashboard for Alasla, a real estate company. This initial phase includes a login/registration system and a multi-step onboarding process for hosts.",
+  "description": "An Airbnb-style dashboard for a real estate company. This initial phase includes a login/registration system and a multi-step onboarding process for hosts.",
   "requestFramePermissions": []
 }

@@ -9,7 +9,6 @@ const capitalize = (s?: string) => s ? s.split(' ').map(word => word.charAt(0).t
 const generateContractHTML = (d: OnboardingData): string => {
     const P = (text: string) => `<p class="mb-4">${text}</p>`;
     const UList = (items: [string, string][]) => `<ul class="grid grid-cols-2 gap-x-8 gap-y-1 my-4">${items.map(item => `<li class="flex"><span class="mr-2">&#62;</span><span>${item[0]}</span></li><li class="flex"><span class="mr-2">&#62;</span><span>${item[1]}</span></li>`).join('')}</ul>`;
-    const BasicList = (items: string[]) => `<ul class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-1 my-4">${items.map(item => `<li class="flex items-start"><span class="mr-2 mt-1 text-alasla-red-start">&#9679;</span><span>${item}</span></li>`).join('')}</ul>`;
     const H2 = (text: string) => `<h2 class="text-center font-bold text-xl text-alasla-dark mt-8 mb-6 border-b border-alasla-gray-medium pb-3">${text}</h2>`;
     const H3 = (text: string) => `<h3 class="font-bold text-base text-alasla-dark mt-6 mb-3">${text}</h3>`;
     const H4 = (text: string) => `<h4 class="font-bold text-sm text-alasla-dark mt-6 mb-2">${text}</h4>`;
@@ -17,13 +16,12 @@ const generateContractHTML = (d: OnboardingData): string => {
     const BLANK = '__________';
 
     const fullAddress = d.street ? `${d.street || ''} ${d.exteriorNumber || ''} ${d.interiorNumber || ''}`.trim() : BLANK;
-    const fullPropertyAddress = d.propertyStreet ? `${d.propertyStreet || ''} ${d.propertyExteriorNumber || ''} ${d.propertyInteriorNumber || ''}`.trim() : BLANK;
     
     // ... constants ...
-    const COMPANY_NAME = "EMPRESA INMOBILIARIA S.A. DE C.V.";
-    const REP_NAME = "[NOMBRE DEL REPRESENTANTE LEGAL]";
-    const RFC_COMPANY = "[RFC DE LA EMPRESA]";
-    const DEED_INFO = "[DATOS DE ESCRITURA CONSTITUTIVA]";
+    const COMPANY_NAME = "ALASLA S.A. DE C.V.";
+    const REP_NAME = "RODRIGO ASLA"; // Nombre representativo para la marca
+    const RFC_COMPANY = "ALA190101AAA";
+    const DEED_INFO = "[DATOS DE ESCRITURA CONSTITUTIVA DE ALASLA]";
 
     return `
         <div class="text-justify text-alasla-dark text-sm leading-relaxed font-sans" style="font-family: Arial, sans-serif;">

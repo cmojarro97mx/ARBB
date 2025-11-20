@@ -71,7 +71,7 @@ const UpcomingBookingsCard: React.FC<{ bookings: typeof upcomingBookingsData }> 
         ) : (
             <div className="text-center py-8">
                 <p className="font-semibold text-alasla-dark">Aún no tienes reservas</p>
-                <p className="text-sm text-alasla-gray-dark mt-1">Tus próximas estancias aparecerán aquí.</p>
+                <p className="text-sm text-alasla-gray-dark mt-1">Tus próximas estancias gestionadas por Alasla aparecerán aquí.</p>
             </div>
         )}
     </div>
@@ -116,7 +116,7 @@ const RecentActivityCard: React.FC<{ activities: typeof recentActivityData }> = 
             ) : (
                  <div className="text-center py-8">
                     <p className="font-semibold text-alasla-dark">Sin actividad reciente</p>
-                    <p className="text-sm text-alasla-gray-dark mt-1">Tus notificaciones aparecerán aquí.</p>
+                    <p className="text-sm text-alasla-gray-dark mt-1">Las notificaciones de Alasla aparecerán aquí.</p>
                 </div>
             )}
         </div>
@@ -136,7 +136,7 @@ const MainDashboard: React.FC<MainDashboardProps> = ({ isContractPending, onNavi
                     <div>
                         <h3 className="text-base font-bold text-blue-900">Tu cuenta está en revisión</h3>
                         <p className="text-sm text-blue-700 mt-1">
-                            ¡Gracias por completar tu registro! Tu contrato ha sido enviado y nuestro equipo lo está revisando. Este banner desaparecerá y tu anuncio se activará una vez que sea aprobado.
+                            ¡Gracias por unirte a Alasla! Tu contrato ha sido enviado y nuestro equipo legal lo está revisando. Este banner desaparecerá y tu anuncio se activará una vez que sea aprobado.
                         </p>
                     </div>
                 </div>
@@ -145,7 +145,7 @@ const MainDashboard: React.FC<MainDashboardProps> = ({ isContractPending, onNavi
             <div>
                 <h1 className="text-3xl font-bold text-alasla-dark">Dashboard</h1>
                 <p className="text-alasla-gray-dark mt-1">
-                    ¡Bienvenido de nuevo, {user?.name}! Aquí tienes un resumen de tu actividad.
+                    ¡Bienvenido de nuevo a Alasla, {user?.name}! Aquí tienes un resumen de tu actividad.
                 </p>
             </div>
 
